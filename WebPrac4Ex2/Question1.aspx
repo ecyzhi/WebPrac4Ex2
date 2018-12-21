@@ -12,15 +12,15 @@
             <table>
                 <tr><td>Please select staff name:</td><td>Please select year:</td></tr>
                 <tr><td>
-                    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="FirstName" DataValueField="FirstName" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged"></asp:DropDownList></td><td>
-                        <asp:RadioButtonList ID="RadioButtonList1" runat="server" DataSourceID="SqlDataSource3" DataTextField="OrderDate" DataValueField="OrderDate"></asp:RadioButtonList>
-                        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [OrderDate] FROM [Orders]"></asp:SqlDataSource>
+                    <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="StaffName" DataValueField="StaffName" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged"></asp:DropDownList></td><td>
+                        <asp:RadioButtonList ID="RadioButtonList1" runat="server" DataSourceID="SqlDataSource3" DataTextField="OrderYear" DataValueField="OrderYear"></asp:RadioButtonList>
                     </td></tr>
                 <tr><td></td><td>
                     <asp:Button ID="Button1" runat="server" Text="Search" /></td></tr>
             </table>
+            <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT DISTINCT YEAR(OrderDate) AS OrderYear FROM ORDERS,EMPLOYEES WHERE ORDERS.EmployeeID = EMPLOYEES.EmployeeID"></asp:SqlDataSource>
             <br />
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" OnSelecting="SqlDataSource1_Selecting" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Employees]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" OnSelecting="SqlDataSource1_Selecting" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT Employees.FirstName + ' ' + Employees.LastName AS StaffName FROM [Employees]"></asp:SqlDataSource>
             <br />
             <asp:Label ID="Label1" runat="server"></asp:Label>
             <br />
